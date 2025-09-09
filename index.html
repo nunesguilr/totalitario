@@ -59,31 +59,6 @@
         <!-- O conteúdo será carregado aqui dinamicamente pelo JavaScript -->
     </main>
 
-    <!-- Seção 5: Analista de Ideias com a IA -->
-    <section id="analista" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-800 rounded-lg shadow-xl p-8 transform transition-all duration-300 hover:scale-[1.01] flex flex-col items-center">
-        <h2 class="text-3xl font-bold text-center mb-6 text-gray-200">Analista de Ideias ✨</h2>
-        <div class="prose max-w-full text-gray-300 text-center mb-4">
-            <p class="text-base sm:text-lg leading-relaxed">
-                Gostaria de aprofundar sua análise? Use nosso assistente de IA para explorar conceitos, conectar ideias ou pedir um resumo dos temas apresentados.
-            </p>
-        </div>
-        <div class="w-full max-w-lg space-y-4">
-            <textarea id="prompt-input" class="w-full p-4 rounded-lg border-2 border-gray-600 bg-gray-700 text-white focus:outline-none focus:border-blue-500 transition-colors" rows="4" placeholder="Ex: 'Resuma as principais críticas de Hayek ao controle central da economia.' ou 'Como a vigilância digital se relaciona com a Novilíngua de Orwell?'"></textarea>
-            <div class="flex justify-center">
-                <button id="submit-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-400" disabled>
-                    Gerar Análise ✨
-                </button>
-            </div>
-        </div>
-        <div id="loading-indicator" class="mt-6 text-blue-600 hidden">
-            <span class="loading-dots text-xl font-bold">Analisando</span>
-        </div>
-        <div id="response-area" class="mt-6 w-full max-w-2xl bg-gray-700 p-6 rounded-lg shadow-inner hidden">
-            <h3 class="text-2xl font-bold mb-4 text-gray-200">Resposta da IA:</h3>
-            <div id="response-content" class="prose max-w-none text-gray-300 text-base"></div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="bg-gray-900 text-white text-center p-6 mt-12">
         <div class="container mx-auto">
@@ -214,70 +189,6 @@
             });
         });
 
-        // Lógica da API de Análise
-        const promptInput = document.getElementById('prompt-input');
-        const submitButton = document.getElementById('submit-button');
-        const loadingIndicator = document.getElementById('loading-indicator');
-        const responseArea = document.getElementById('response-area');
-        const responseContent = document.getElementById('response-content');
-
-        // Habilita o botão apenas se houver texto
-        promptInput.addEventListener('input', () => {
-            submitButton.disabled = promptInput.value.trim() === '';
-        });
-
-        submitButton.addEventListener('click', async () => {
-            const userQuery = promptInput.value.trim();
-            if (!userQuery) return;
-
-            loadingIndicator.classList.remove('hidden');
-            responseArea.classList.add('hidden');
-            responseContent.innerHTML = '';
-            submitButton.disabled = true;
-
-            try {
-                // A chave de API não é mais inserida diretamente no código
-                // A chamada agora é feita para o endpoint público, e a chave é injetada
-                // de forma segura no ambiente do Canvas.
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
-                const apiKey = "";
-                
-                const systemPrompt = "Você é um mentor intelectual, conservador e libertário, com profundo conhecimento das obras de George Orwell, Ludwig von Mises, Friedrich Hayek e outros pensadores liberais clássicos. Sua função é responder a perguntas sobre a relação entre totalitarismo, liberalismo, economia e vigilância, usando uma linguagem clara, analítica e fundamentada. Mantenha um tom sério e erudito, focando na lógica e nos dados históricos para combater falácias. Baseie suas respostas nos arquivos fornecidos. Use o português do Brasil. Para a formatação, utilize apenas markdown.";
-                const fullPrompt = `${systemPrompt}\n\nConsulta do usuário: ${userQuery}`;
-
-                const payload = {
-                    contents: [{ parts: [{ text: fullPrompt }] }],
-                    tools: [{ "google_search": {} }],
-                    systemInstruction: {
-                        parts: [{ text: systemPrompt }]
-                    }
-                };
-
-                const response = await fetch(`${apiUrl}?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Erro na API: ${response.status} ${response.statusText}`);
-                }
-
-                const result = await response.json();
-                const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || 'Não foi possível gerar uma resposta. Tente novamente com uma pergunta diferente.';
-                
-                responseContent.innerHTML = text.replace(/\n/g, '<br>');
-                responseArea.classList.remove('hidden');
-
-            } catch (error) {
-                console.error('Erro ao chamar a API:', error);
-                responseContent.textContent = 'Ocorreu um erro ao processar a sua solicitação. Por favor, tente novamente.';
-                responseArea.classList.remove('hidden');
-            } finally {
-                loadingIndicator.classList.add('hidden');
-                submitButton.disabled = false;
-            }
-        });
     </script>
 </body>
 </html>
