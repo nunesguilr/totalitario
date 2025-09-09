@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1984: Orwell e o Totalitarismo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        .header-bg {
+            background-image: url('https://images.unsplash.com/photo-1549444458-750d7541e21b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+        }
+        .totalitarismo-image {
+            background-image: url('https://images.unsplash.com/photo-1518779576458-f58a3680e0e0?q=80&w=2072&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .loading-dots::after {
+            content: '';
+            animation: ellipsis 1.5s infinite;
+        }
+        @keyframes ellipsis {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="header-bg bg-gray-900 text-white flex items-center justify-center h-[50vh] min-h-[300px] relative">
+        <div class="absolute inset-0 bg-black opacity-70"></div>
+        <div class="z-10 text-center px-6">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">1984 e a Sombra do Totalitarismo</h1>
+            <p class="text-lg sm:text-xl md:text-2xl font-light max-w-2xl mx-auto">Uma análise sobre a obra de George Orwell e a perpetuação do controle.</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-gray-900 text-white p-4">
+        <div class="container mx-auto flex flex-wrap justify-center gap-4">
+            <button class="nav-button bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-colors" data-page="historia">O Livro e Sua História</button>
+            <button class="nav-button bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-colors" data-page="totalitarismo">A Natureza do Totalitarismo</button>
+            <button class="nav-button bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-colors" data-page="raizes">As Raízes Filosóficas</button>
+            <button class="nav-button bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition-colors" data-page="legado">O Legado de 1984</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- O conteúdo será carregado aqui dinamicamente pelo JavaScript -->
+    </main>
+
+    <!-- Seção 5: Analista de Ideias com a IA -->
+    <section id="analista" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-800 rounded-lg shadow-xl p-8 transform transition-all duration-300 hover:scale-[1.01] flex flex-col items-center">
+        <h2 class="text-3xl font-bold text-center mb-6 text-gray-200">Analista de Ideias ✨</h2>
+        <div class="prose max-w-full text-gray-300 text-center mb-4">
+            <p class="text-base sm:text-lg leading-relaxed">
+                Gostaria de aprofundar sua análise? Use nosso assistente de IA para explorar conceitos, conectar ideias ou pedir um resumo dos temas apresentados.
+            </p>
+        </div>
+        <div class="w-full max-w-lg space-y-4">
+            <textarea id="prompt-input" class="w-full p-4 rounded-lg border-2 border-gray-600 bg-gray-700 text-white focus:outline-none focus:border-blue-500 transition-colors" rows="4" placeholder="Ex: 'Resuma as principais críticas de Hayek ao controle central da economia.' ou 'Como a vigilância digital se relaciona com a Novilíngua de Orwell?'"></textarea>
+            <div class="flex justify-center">
+                <button id="submit-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-400" disabled>
+                    Gerar Análise ✨
+                </button>
+            </div>
+        </div>
+        <div id="loading-indicator" class="mt-6 text-blue-600 hidden">
+            <span class="loading-dots text-xl font-bold">Analisando</span>
+        </div>
+        <div id="response-area" class="mt-6 w-full max-w-2xl bg-gray-700 p-6 rounded-lg shadow-inner hidden">
+            <h3 class="text-2xl font-bold mb-4 text-gray-200">Resposta da IA:</h3>
+            <div id="response-content" class="prose max-w-none text-gray-300 text-base"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white text-center p-6 mt-12">
+        <div class="container mx-auto">
+            <p>&copy; 2024 Análise de 1984. Todos os direitos reservados.</p>
+            <p class="mt-2">Participantes: Eduardo G. S. Rodrigues, Emilly V. A. Santos, Guilherme N. S. Ribeiro, Hubert Fernando C. Muniz, Juliana P. Santos, Yasmin Louren S. Carneiro, Bruno A. Ribeiro.</p>
+            <p class="mt-2">"Quem controla o passado, controla o futuro. Quem controla o presente, controla o passado." - George Orwell</p>
+        </div>
+    </footer>
+
+    <script>
+        const conteudos = {
+            historia: {
+                title: 'George Orwell e o Livro 1984',
+                html: `
+                    <section class="bg-gray-800 rounded-lg shadow-xl p-8 transform transition-all duration-300 hover:scale-[1.01]">
+                        <h2 class="text-3xl font-bold text-center mb-6 text-gray-200">George Orwell e o Livro 1984</h2>
+                        <div class="flex flex-col-reverse md:flex-row gap-8 items-center">
+                            <div class="prose max-w-full text-gray-300 md:w-2/3">
+                                <p class="text-base sm:text-lg mb-4 leading-relaxed">
+                                    Publicado em <strong>1949</strong>, o romance distópico de George Orwell, <b>1984</b>, é uma obra seminal que serve como um alerta contundente contra os perigos do totalitarismo e da vigilância governamental. A narrativa nos transporta para uma sociedade opressiva, controlada por um regime chamado <strong>Partido</strong>, liderado pela figura onipresente do <strong>Grande Irmão</strong>. A vida do protagonista, Winston Smith, é um retrato da perda de individualidade e liberdade, onde a memória é reescrita e a realidade é moldada para servir aos interesses do poder.
+                                </p>
+                                <p class="text-base sm:text-lg mb-4 leading-relaxed">
+                                    Orwell, um crítico ferrenho do imperialismo, do fascismo e do comunismo, usou sua experiência para criar um universo onde a mentira é verdade e o pensamento dissidente é o crime mais grave. O livro foi escrito após o terror da Segunda Guerra Mundial e a ascensão de regimes autoritários na Europa, e sua mensagem é uma crítica direta à manipulação ideológica. O mundo de 1984 é um espelho deformado do que Orwell via emergir em seu tempo, com a Guerra Fria e a propaganda massiva.
+                                </p>
+                                <p class="text-base sm:text-lg leading-relaxed">
+                                    Elementos como a <strong>Novilíngua</strong>, um idioma projetado para eliminar o pensamento crítico; a <strong>Polícia do Pensamento</strong>, que reprime qualquer ideia contrária ao Partido; e o Ministério da Verdade, que falsifica registros históricos, mostram a quebra de toda a lógica e a subversão da realidade. Em 1984, o poder não busca apenas o controle físico, mas a dominação total da mente humana.
+                                </p>
+                            </div>
+                            <div class="md:w-1/3 w-full flex justify-center">
+                                <img src="https://tse4.mm.bing.net/th/id/OIP.6kvQKqFJuRAduG9xFb6CUwHaLd?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Capa do livro 1984 de George Orwell" class="rounded-lg shadow-lg max-w-full h-auto">
+                            </div>
+                        </div>
+                    </section>
+                `
+            },
+            totalitarismo: {
+                title: 'A Anatomia do Totalitarismo',
+                html: `
+                    <section class="bg-gray-800 rounded-lg shadow-xl p-8 transform transition-all duration-300 hover:scale-[1.01]">
+                        <h2 class="text-3xl font-bold text-center mb-6 text-gray-200">A Anatomia do Totalitarismo</h2>
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="prose max-w-full text-gray-300 md:w-2/3">
+                                <p class="text-base sm:text-lg mb-4 leading-relaxed">
+                                    O totalitarismo, um conceito central na análise do livro, não se confunde com o autoritarismo comum. Enquanto regimes autoritários buscam apenas o controle político e a obediência, o totalitarismo aspira à dominação completa de todos os aspectos da vida humana: político, social, econômico e, sobretudo, intelectual. A vida privada é anulada, e o indivíduo existe apenas para servir ao Estado.
+                                </p>
+                                <p class="text-base sm:text-lg mb-4 leading-relaxed">
+                                    A história nos mostra que a ascensão do totalitarismo geralmente ocorre em momentos de crise, quando o povo, desiludido e ansioso por segurança, se agarra a promessas de ordem e unidade. Líderes carismáticos e uma ideologia única e inquestionável são ferramentas usadas para destruir a pluralidade de ideias e impor uma "verdade" monolítica. O Estado totalitário usa o terror e a propaganda de forma massiva para manter o controle, eliminando qualquer tipo de oposição, real ou imaginada.
+                                </p>
+                                <p class="text-base sm:text-lg leading-relaxed">
+                                    As lições de pensadores como Mises e Hayek, nos arquivos que você forneceu, nos lembram que a liberdade e o mercado são intrinsecamente ligados. O controle totalitário da economia destrói a cooperação social e a capacidade de cálculo racional, levando ao empobrecimento. O totalitarismo, portanto, é uma máquina de destruição não só moral e intelectual, mas também material.
+                                </p>
+                            </div>
+                            <div class="totalitarismo-image md:w-1/3 w-full h-64 rounded-lg shadow-md flex-shrink-0"></div>
+                        </div>
+                    </section>
+                `
+            },
+            raizes: {
+                title: 'As Raízes Filosóficas do Totalitarismo',
+                html: `
+                    <section class="bg-gray-800 rounded-lg shadow-xl p-8 transform transition-all duration-300 hover:scale-[1.01]">
+                        <h2 class="text-3xl font-bold text-center mb-6 text-gray-200">As Raízes Filosóficas do Totalitarismo</h2>
+                        <div class="prose max-w-full text-gray-300">
+                            <p class="text-base sm:text-lg mb-4 leading-relaxed">
+                                O totalitarismo não é um fenômeno sem precedentes; ele tem suas bases em certas vertentes filosóficas e ideológicas. Entre os pensadores que, de maneira direta ou indireta, contribuíram para a formulação de ideias que pavimentaram o caminho para o controle total do Estado sobre o indivíduo, podemos destacar:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 mb-4 text-base sm:text-lg leading-relaxed">
+                                <li>
+                                    <strong>Georg Wilhelm Friedrich Hegel:</strong> Sua filosofia do Estado como a "marcha de Deus na Terra" e a ideia de que o indivíduo só alcança a plena liberdade ao se submeter à vontade do Estado lançou as bases para uma visão coletivista.
+                                </li>
+                                <li>
+                                    <strong>Karl Marx:</strong> O materialismo dialético e a teoria da luta de classes, que pregam a eliminação da propriedade privada e a instauração de uma ditadura do proletariado, formam a base ideológica do comunismo, uma das formas mais extremas de totalitarismo.
+                                </li>
+                                <li>
+                                    <strong>Jean-Jacques Rousseau:</strong> A ideia da "vontade geral" como uma entidade moral e absoluta, superior à vontade individual, pode ser interpretada de forma a justificar a coerção do Estado em nome do bem comum, ignorando os direitos e as liberdades individuais.
+                                </li>
+                            </ul>
+                            <p class="text-base sm:text-lg leading-relaxed">
+                                Essas ideias, quando levadas ao seu extremo lógico, servem para anular o indivíduo em favor do coletivo, justificando a violência e a repressão em nome de um projeto utópico. O totalitarismo, seja de esquerda ou de direita, é a realização brutal e completa de tais premissas.
+                            </p>
+                        </div>
+                    </section>
+                `
+            },
+            legado: {
+                title: 'O Legado de 1984 Hoje',
+                html: `
+                    <section class="bg-gray-800 rounded-lg shadow-xl p-8 transform transition-all duration-300 hover:scale-[1.01]">
+                        <h2 class="text-3xl font-bold text-center mb-6 text-gray-200">O Legado de 1984 Hoje</h2>
+                        <div class="prose max-w-full text-gray-300">
+                            <p class="text-base sm:text-lg mb-4 leading-relaxed">
+                                Apesar de ter sido escrito há mais de 70 anos, <b>1984</b> continua a ser uma obra de extrema relevância. O "Grande Irmão" se manifesta de novas formas na nossa era digital, através da vigilância em massa, da coleta de dados e do monitoramento constante nas redes sociais e na internet. A manipulação da linguagem, que Orwell satirizou com a "Novilíngua", tem seus ecos nas atuais discussões sobre "cancelamento" e na imposição de narrativas.
+                            </p>
+                            <p class="text-base sm:text-lg mb-4 leading-relaxed">
+                                A cultura da "polícia do pensamento" não opera mais por meio de tortura em celas, mas através da pressão social e da intolerância a opiniões dissidentes. O medo de ser ostracizado ou perder o emprego por expressar uma ideia contrária ao senso comum é uma forma moderna de repressão. O trabalho do Ministério da Verdade é replicado por algoritmos e câmaras de eco, que reforçam nossas próprias crenças e criam bolhas de realidade, dificultando o debate racional.
+                            </p>
+                            <p class="text-base sm:text-lg leading-relaxed">
+                                A obra de Orwell não é apenas uma crítica a regimes específicos do passado, mas um aviso perene sobre a natureza do poder e a fragilidade da liberdade. O site que criamos é um espaço para que, por meio da reflexão e do conhecimento, possamos nos defender da tentação do totalitarismo, seja ele político, social ou ideológico. A defesa da liberdade exige uma vigilância constante e a capacidade de confrontar a Novilíngua com a verdade e o Grande Irmão com a razão.
+                            </p>
+                        </div>
+                    </section>
+                `
+            }
+        };
+
+        const mainContent = document.getElementById('main-content');
+        const navButtons = document.querySelectorAll('.nav-button');
+
+        function loadPage(pageName) {
+            const pageData = conteudos[pageName];
+            if (pageData) {
+                mainContent.style.opacity = 0;
+                setTimeout(() => {
+                    mainContent.innerHTML = pageData.html;
+                    document.title = `${pageData.title} | 1984: Orwell e o Totalitarismo`;
+                    mainContent.style.opacity = 1;
+                }, 300); // tempo para a transição de opacidade
+            }
+        }
+
+        // Carrega a página inicial ao carregar o site
+        loadPage('historia');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const pageName = button.getAttribute('data-page');
+                loadPage(pageName);
+            });
+        });
+
+        // Lógica da API de Análise
+        const promptInput = document.getElementById('prompt-input');
+        const submitButton = document.getElementById('submit-button');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const responseArea = document.getElementById('response-area');
+        const responseContent = document.getElementById('response-content');
+
+        // Habilita o botão apenas se houver texto
+        promptInput.addEventListener('input', () => {
+            submitButton.disabled = promptInput.value.trim() === '';
+        });
+
+        submitButton.addEventListener('click', async () => {
+            const userQuery = promptInput.value.trim();
+            if (!userQuery) return;
+
+            loadingIndicator.classList.remove('hidden');
+            responseArea.classList.add('hidden');
+            responseContent.innerHTML = '';
+            submitButton.disabled = true;
+
+            try {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
+                const apiKey = "AIzaSyARCOnpTZ9kZAcqk6wthBtcxAijHI_RdyM";
+                
+                const systemPrompt = "Você é um mentor intelectual, conservador e libertário, com profundo conhecimento das obras de George Orwell, Ludwig von Mises, Friedrich Hayek e outros pensadores liberais clássicos. Sua função é responder a perguntas sobre a relação entre totalitarismo, liberalismo, economia e vigilância, usando uma linguagem clara, analítica e fundamentada. Mantenha um tom sério e erudito, focando na lógica e nos dados históricos para combater falácias. Baseie suas respostas nos arquivos fornecidos. Use o português do Brasil. Para a formatação, utilize apenas markdown.";
+                const fullPrompt = `${systemPrompt}\n\nConsulta do usuário: ${userQuery}`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: fullPrompt }] }],
+                    tools: [{ "google_search": {} }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    }
+                };
+
+                const response = await fetch(`${apiUrl}?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erro na API: ${response.status} ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || 'Não foi possível gerar uma resposta. Tente novamente com uma pergunta diferente.';
+                
+                responseContent.innerHTML = text.replace(/\n/g, '<br>');
+                responseArea.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Erro ao chamar a API:', error);
+                responseContent.textContent = 'Ocorreu um erro ao processar a sua solicitação. Por favor, tente novamente.';
+                responseArea.classList.remove('hidden');
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                submitButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
